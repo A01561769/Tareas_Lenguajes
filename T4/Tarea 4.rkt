@@ -10,6 +10,9 @@
       )
   )
 
+;Funcion que regresa un renglón sin el elemento especificada por su posición
+; n = numero de columna a eliminar
+; reng = renglon al que se le eliminara el elemento
 (define (elimina n reng)
   (cond
     ((null? reng) '())
