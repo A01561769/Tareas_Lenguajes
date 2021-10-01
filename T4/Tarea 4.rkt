@@ -169,7 +169,27 @@
 
 ; ---------------------------------------- SECCION 2 - 3.a ----------------------------------------
 ; Funcion que que lista los nodos destino que tienen a N como nodo origen directo.
+; graf = es el grafo a analizar
+; nodo = es el nodo del cual se quieren saber los destino
+(define (nodos-destino graf nodo)
+  (cond
+    ((null? graf) '())
+    ((eq? (caar graf) nodo) (map car (cdar graf)))
+    (else (nodos-destino (cdr graf) nodo))
+    )
+  )
+; Definicion de grafo
+(define g
+'((A (B 2) (D 10))
+ (B (C 9) (E 5))
+ (C (A 12) (D 6))
+ (D (E 7))
+ (E (C 3))
+))
 
+; Casos de prueba
+(nodos-destino g 'A)
+(nodos-destino g 'D)
 
 ; ---------------------------------------- SECCION 2 - 3.b ----------------------------------------
 ; Funcion que recibe como argumentos un grafo y el nombre de un nodo, y regresa el grafo sin el nodo
