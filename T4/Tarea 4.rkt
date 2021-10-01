@@ -104,14 +104,67 @@
 (agrega-valor 4 '(3 5) '((1 2 3)(0 2 1)))
 
 ; ---------------------------------------- SECCION 1 - 2.a ----------------------------------------
+;Definición de ABB
+(define ABB
+  '(8
+    (5
+     (2 () ())
+     (7 () ()))
+    (9 ()
+      (15 (11 () ())
+      () ))))
+
 ; Funcion que, dado un árbol binario de búsqueda regresa el rango de los valores contenidos en él
 ; como la lista (min max) donde min el valor más pequeño y max es el valor más grande.
-;  = Arbol a analizar
+; lista = Árbol binario de busqueda
+(define (rango lista)
+  [cons (min-lista lista) (cons (max-lista lista) '())])
 
+;Función auxiliar que busca el valor mínimo del árbol
+(define (min-lista lista)
+  [cond [(null? lista)
+         '()]
+        [(null? (cadr lista))
+         (car lista)]
+        [else (min-lista (cadr lista))]])
+
+;Función auxiliar que busca el valor máximo del árbol
+(define (max-lista lista)
+   [cond [(null? lista)
+         '()]
+        [(null? (caddr lista))
+         (car lista)]
+        [else (max-lista (caddr lista))]])
+        
+; Casos de prueba
+(rango ABB)
+(rango '(8 ()()))
 
 ; ---------------------------------------- SECCION 1 - 2.b ----------------------------------------
 ; Funcion que, regresa la cantidad de nodos en cierto nivel de un árbol binario.
-;  = Arbol a analizar
+; nivel = el nivel del árbol a evaluar (empieza desde el 0)
+; lista = Árbol binario de busqueda
+(define (cuenta-nivel nivel lista)
+  [cond [(null? lista) 0]
+        [(zero? nivel) 1]
+        [else (+ [contar-izquierda nivel (cadr lista)] [contar-derecha nivel (caddr lista)])]])
+
+;Función auxiliar para contar en la rama izquierda
+(define (contar-izquierda nivel lista)
+  [cond [(null? lista) 0]
+        [(= nivel 1) 1]
+        [else (+ [contar-izquierda (- nivel 1) (cadr lista)] [contar-derecha (- nivel 1) (caddr lista)])]])
+
+;Función auxiliar para contar en la rama derecha
+(define (contar-derecha nivel lista)
+  [cond [(null? lista) 0]
+        [(= nivel 1) 1]
+        [else (+ [contar-izquierda (- nivel 1) (cadr lista)] [contar-derecha (- nivel 1) (caddr lista)])]])
+
+; Casos de prueba
+(cuenta-nivel 3 ABB)
+(cuenta-nivel 2 ABB)
+( cuenta-nivel 2 '(a (b (c () ()) ()) (d (e () ()) ())) )
 
 
 ; ---------------------------------------- SECCION 2 - 3.a ----------------------------------------
