@@ -1,5 +1,9 @@
 #lang racket
-; SECCION 1 - 1.a
+; A00820039 Mariano Hurtado de Mendoza Carranza
+; A00819647 Carlos Eduardo Govea Gonzales
+; A01561769 Antonio Torres Carvajal
+
+; ---------------------------------------- SECCION 1 - 1.a ----------------------------------------
 ; Funcion que regresa la matriz dada sin la columna especificada por su posición en la matriz
 ; n = numero de columna a eliminar
 ; matrx = matriz a la que se le eliminara la columna
@@ -18,9 +22,10 @@
       )
   )
 
+; Casos de prueba
 (elimina-columna 3 '((4 0 3 1)(5 1 2 1)(6 0 1 1)))
 
-; SECCION 1 - 1.b
+; ---------------------------------------- SECCION 1 - 1.b ----------------------------------------
 ; Funcion que agrega un nuevo valor a una matriz dada en la posición (renglón, columna) especificada, de la siguiente forma:
 ; si la matriz ya tiene un valor en esa posición, lo sustituye por el valor a agregar, pero si la matriz no tiene el número
 ; de renglones y/o columnas necesarias para colocar el nuevo valor, agregua los renglones y/o columnas mínimas necesarias
@@ -93,3 +98,27 @@
       (append '(0) (crear-renglon (- tam 1)))
       )
   )
+
+; Casos de prueba
+(agrega-valor 5 '(1 2) '((1 2 3)(0 2 1))) 
+(agrega-valor 4 '(3 5) '((1 2 3)(0 2 1)))
+
+; ---------------------------------------- SECCION 1 - 2.a ----------------------------------------
+; Funcion que, dado un árbol binario de búsqueda regresa el rango de los valores contenidos en él
+; como la lista (min max) donde min el valor más pequeño y max es el valor más grande.
+;  = Arbol a analizar
+
+
+; ---------------------------------------- SECCION 1 - 2.b ----------------------------------------
+; Funcion que, regresa la cantidad de nodos en cierto nivel de un árbol binario.
+;  = Arbol a analizar
+
+
+; ---------------------------------------- SECCION 2 - 3.a ----------------------------------------
+; Funcion que que lista los nodos destino que tienen a N como nodo origen directo.
+
+
+; ---------------------------------------- SECCION 2 - 3.b ----------------------------------------
+; Funcion que recibe como argumentos un grafo y el nombre de un nodo, y regresa el grafo sin el nodo
+; especificado (si existe). También elimina los arcos dirigidos al nodo eliminado.
+
