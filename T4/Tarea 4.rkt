@@ -26,12 +26,19 @@
 ; de renglones y/o columnas necesarias para colocar el nuevo valor, agregua los renglones y/o columnas mínimas necesarias
 ; para agregar el valor.
 ; val = numero a agregar
-; pos = lista con la posición a agregar o cambiar
+; pos = lista con la posición a agregar o cambiar (renglon, columna)
 ; matrx = matriz a modificar
 
 (define (agrega-valor val pos matrx)
   (cond  ;Verificar si hay suf. rengs  Verificar si hay suf. cols
-    ((or (> (car pos) (length matrx)) (> (cadr pos) (length (car matrx)))) (agrega-faltantes val pos matrx))
+    ((or (> (car pos) (length matrx)) (> (cadr pos) (length (car matrx))))
+     (cambia-valor val (car pos) (cadr pos)
+                   (append (extender-existentes (- (cadr pos) (length (car matrx))) matrx)
+                           (agrega-faltantes (if (> (cadr pos) (length (car matrx)))
+                                                 (cadr pos)
+                                                 (length (car matrx)))
+                                             (- (car pos) (length matrx)))))
+     )
      (else (cambia-valor val (car pos) (cadr pos) matrx))
     )
   )
@@ -59,5 +66,30 @@
       )
   )
 
-; Funcion auxiliar que agrega los renglones y columnas faltantes en la matriz
-(define (agrega-faltantes val pos matrx) '())
+; Funcion auxiliar que agrega las columnas faltantes en la matriz
+; faltantes = columnas de 0s faltantes
+; matrx = matriz base a extender
+(define (extender-existentes faltantes matrx)
+  (if (null? matrx)
+      '()
+      (append (list (append (car matrx) (crear-renglon faltantes))) (extender-existentes faltantes (cdr matrx)))
+      )
+  )
+
+; Funcion auxiliar que agrega los renglones faltantes en la matriz
+; tam = tamaño de la cada lista de 0s que falta
+; cantidad = cantidad de renglones que faltan
+(define (agrega-faltantes tam cantidad)
+  (if (<= cantidad 0) '()
+      (append (list (crear-renglon tam)) (agrega-faltantes tam (- cantidad 1)))
+      )
+  )
+
+; Funcion que regresa una lista con cierta cantidad de 0s
+; tam = tamaño la lista a crear
+(define (crear-renglon tam)
+  (if (= tam 0)
+      '()
+      (append '(0) (crear-renglon (- tam 1)))
+      )
+  )
