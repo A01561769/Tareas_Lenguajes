@@ -95,17 +95,21 @@ main = do
     print "1. - Medio"
     print (medio 2 1 5 4)
     print (medio 2 2 2 2)
+    
     print "2. - Primos"
     print (primos 1 10)
     print (primos 5 11)
     print (primos 8 10)
+
     print "3. - Mayores"
     print (mayores [8,5,2,4] [1,2,3,4])
     print (mayores [1,2,3] [2,3,1])
+
     print "4. - Multiplica"
     print (multiplica [1,1] [1,1,1])
     print (multiplica [1,1,1] [])
     print (multiplica [1,1,1,1] [1,1])
+
     print "5. - Desplaza"
     print (desplaza [1,2,3] 1)
     print (desplaza [1,2,3] 2)
