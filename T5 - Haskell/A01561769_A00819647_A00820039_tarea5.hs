@@ -1,3 +1,4 @@
+import System.Directory.Internal.Prelude (Num(fromInteger))
 --  A00820039 Mariano Hurtado de Mendoza Carranza
 --  A00819647 Carlos Eduardo Govea Gonzales
 --  A01561769 Antonio Torres Carvajal
@@ -5,13 +6,11 @@
 --  ------------ Programación básica y recursiva SIN LISTAS ------------
 --  Función que promedia  los  2  valores  extremos  (el  menor  y
 --  el mayor) en los 4 argumentos de la función.
---  a, b, c, d = parametros numericos
 medio :: Float  -> Float -> Float -> Float -> Float
 medio 0 0 0 0 = 0
 medio a b c d = (menor a b c d + mayor a b c d) / 2
 
 --  Función auxiliar que busca el valor menor de 4 valores
---  a, b, c, d = parametros numericos
 menor :: Float -> Float -> Float -> Float -> Float
 menor a b c d
   | a > b = menor b c d a
@@ -20,7 +19,6 @@ menor a b c d
   | otherwise = a
 
 --  Función auxiliar que busca el valor mayor de 4 valores
---  a, b, c, d = parametros numericos
 mayor :: Float -> Float -> Float -> Float -> Float
 mayor a b c d
   | a < b = mayor b c d a
@@ -30,8 +28,6 @@ mayor a b c d
 
 --  Función recursiva que cuenta la cantidad de números primos
 --  que existen en un rango definido por dos argumentos.
---  a = limite inferior del rango
---  b = limite superior del rango
 primos :: Float -> Float -> Int
 primos a b
     | a > b = 0
@@ -48,8 +44,6 @@ primos a b
 
 --  Función recursiva que verifica si un valor es primo
 --  haciendo la division por cada valor previo
---  a = valor a dividir
---  b = divisor
 verPrim :: Float -> Float -> Bool
 verPrim a b
     | a == 0 = False
@@ -58,7 +52,6 @@ verPrim a b
     | otherwise = False
 
 --  Función para verificar si un valor es Float
---  x = valor a verificar
 verFloat :: Float -> Bool
 verFloat x = x /= fromInteger (round x)
 
@@ -87,6 +80,16 @@ creaResp :: Int -> [Int]
 creaResp 0 = []
 creaResp x = 1:creaResp (x - 1)
 
+--  Función que que reciba una lista de cualquier tamaño y un entero
+--  no negativo N, y regrese la misma lista a la cual se le han
+--  aplicado  N desplazamientos circulares hacia la derecha.
+desplaza :: [Int] -> Int -> [Int]
+desplaza [] _ = []
+desplaza lista x = 
+    if verFloat (fromIntegral x / fromIntegral (length lista)) then
+        []
+    else
+        lista
 
 main = do
     print "1. - Medio"
@@ -103,3 +106,7 @@ main = do
     print (multiplica [1,1] [1,1,1])
     print (multiplica [1,1,1] [])
     print (multiplica [1,1,1,1] [1,1])
+    print "5. - Desplaza"
+    print (desplaza [1,2,3] 1)
+    print (desplaza [1,2,3] 2)
+    print (desplaza [1,2,3] 6)
