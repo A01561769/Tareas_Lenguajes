@@ -35,7 +35,7 @@ mayor a b c d
 primos :: Float -> Float -> Int
 primos a b
     | a > b = 0
-    | a == b = 
+    | a == b =
         if verPrim a (a - 1) then
             1
         else
@@ -52,7 +52,7 @@ primos a b
 --  b = divisor
 verPrim :: Float -> Float -> Bool
 verPrim a b
-    | a == 0 = False 
+    | a == 0 = False
     | b == 1 = True
     | verFloat (a / b) = verPrim a (b - 1)
     | otherwise = False
@@ -62,6 +62,17 @@ verPrim a b
 verFloat :: Float -> Bool
 verFloat x = x /= fromInteger (round x)
 
+-- --------------- Listas y empatamiento de patrones ---------------
+--  Función que compara los elementos de dos listas del mismo
+--  tamaño para regresar una lista que indique en cuálde las 2 listas
+--  se encuentra el mayor de cada posición.
+mayores :: [Int] -> [Int] -> [Int]
+mayores [] [] = []
+mayores (x:resto1) (y:resto2) =
+    if x >= y then
+        1:mayores resto1 resto2
+    else
+        2:mayores resto1 resto2
 
 
 
@@ -75,3 +86,5 @@ main = do
     print (primos 5 11)
     print (primos 8 10)
     print "3. - Mayores"
+    print (mayores [8,5,2,4] [1,2,3,4])
+    print (mayores [1,2,3] [2,3,1])
