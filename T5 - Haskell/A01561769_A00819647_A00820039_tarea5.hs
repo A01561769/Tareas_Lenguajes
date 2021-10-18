@@ -2,7 +2,7 @@
 --  A00819647 Carlos Eduardo Govea Gonzales
 --  A01561769 Antonio Torres Carvajal
 
--- ------------ Programación básica y recursiva SIN LISTAS ------------
+--  ------------ Programación básica y recursiva SIN LISTAS ------------
 --  Función que promedia  los  2  valores  extremos  (el  menor  y
 --  el mayor) en los 4 argumentos de la función.
 --  a, b, c, d = parametros numericos
@@ -62,7 +62,7 @@ verPrim a b
 verFloat :: Float -> Bool
 verFloat x = x /= fromInteger (round x)
 
--- --------------- Listas y empatamiento de patrones ---------------
+--  --------------- Listas y empatamiento de patrones ---------------
 --  Función que compara los elementos de dos listas del mismo
 --  tamaño para regresar una lista que indique en cuálde las 2 listas
 --  se encuentra el mayor de cada posición.
@@ -74,7 +74,18 @@ mayores (x:resto1) (y:resto2) =
     else
         2:mayores resto1 resto2
 
+--  Función que obtiene una lista de 1’s que representa el
+--  resultado en unario de multiplicar dos enteros no
+--  negativos en unario dados como listas de unos.
+multiplica :: [Int] -> [Int] -> [Int]
+multiplica lista1 [] = []
+multiplica [] lista2 = []
+multiplica lista1 lista2 =
+    creaResp (length lista1 * length lista2)
 
+creaResp :: Int -> [Int]
+creaResp 0 = []
+creaResp x = 1:creaResp (x - 1)
 
 
 main = do
@@ -88,3 +99,7 @@ main = do
     print "3. - Mayores"
     print (mayores [8,5,2,4] [1,2,3,4])
     print (mayores [1,2,3] [2,3,1])
+    print "4. - Multiplica"
+    print (multiplica [1,1] [1,1,1])
+    print (multiplica [1,1,1] [])
+    print (multiplica [1,1,1,1] [1,1])
