@@ -107,6 +107,11 @@ intercambia :: AB Int -> AB Int
 intercambia V = V
 intercambia (A l n r) = (A (intercambia r) n (intercambia l))
 
+-- Función c_tabla que dado un número n regresa una lista con 
+-- las tablas de multiplicar de n con comprensión de listas
+c_tabla :: Int -> [((Int, Int), Int)]
+c_tabla n = [((n, y), n * y) | y <-[1..10]]
+
 main = do
     print "1. - Medio"
     print (medio 2 1 5 4)
@@ -140,4 +145,8 @@ main = do
     print(intercambia V )
     print(intercambia (A (A (A V 2 V) 5 (A V 7 V)) 8 (A V 9 (A (A V 11 V) 15 V))))
     print(intercambia (A (A (A V 3 V) 2 V) 1 (A (A V 5 V) 4 V)))
+    
+    print "9. - c_tabla"
+    print(c_tabla 1)
+    print(c_tabla 8)
 
