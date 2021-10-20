@@ -80,16 +80,32 @@ creaResp :: Int -> [Int]
 creaResp 0 = []
 creaResp x = 1:creaResp (x - 1)
 
---  Función que que reciba una lista de cualquier tamaño y un entero
+--  Función que reciba una lista de cualquier tamaño y un entero
 --  no negativo N, y regrese la misma lista a la cual se le han
 --  aplicado  N desplazamientos circulares hacia la derecha.
+
 desplaza :: [Int] -> Int -> [Int]
-desplaza [] _ = []
-desplaza lista x = 
-    if verFloat (fromIntegral x / fromIntegral (length lista)) then
-        []
-    else
-        lista
+desplaza list 0 = list
+desplaza list n =  desplaza (last list : init list) (n-1) 
+
+-- Un Árbol Binario (AB) puede ser representado en Haskell,
+-- por medio de la siguiente declaración: 
+data AB t = A (AB t) t (AB t) | V deriving (Show)
+
+-- Función  impares  que  dado  un  árbol  binario,  cree  una  
+-- lista  con  los valores impares de sus nodos. Recorrer el árbol 
+-- en preorden al buscar los valores. 
+
+impares :: AB Int -> [Int]
+impares V = []
+impares (A l n r) = if odd n then [n] ++ impares l ++ impares r else impares l ++ impares r
+
+-- Función  intercambia  que  dado  un  árbol  binario  intercambie  los 
+-- subárboles izquierdos de los nodos con los subárboles derechos.
+
+intercambia :: AB Int -> AB Int
+intercambia V = V
+intercambia (A l n r) = (A (intercambia r) n (intercambia l))
 
 main = do
     print "1. - Medio"
@@ -114,3 +130,14 @@ main = do
     print (desplaza [1,2,3] 1)
     print (desplaza [1,2,3] 2)
     print (desplaza [1,2,3] 6)
+
+    print "6. - Impares"
+    print(impares (V))
+    print(impares (A (A (A V 2 V) 5 (A V 7 V)) 8 (A V 9 (A (A V 11 V) 15 V))))
+    print(impares (A (A (A V 3 V) 2 V) 1 (A (A V 5 V) 4 V)))
+
+    print "7. - intercambia"
+    print(intercambia V )
+    print(intercambia (A (A (A V 2 V) 5 (A V 7 V)) 8 (A V 9 (A (A V 11 V) 15 V))))
+    print(intercambia (A (A (A V 3 V) 2 V) 1 (A (A V 5 V) 4 V)))
+
